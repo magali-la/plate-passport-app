@@ -1,5 +1,5 @@
-// fetch random meal for the home page
-export async function fetchRandomMeal(): Promise<any> {
+// fetch random meal for the home page - use generic to account for complex type at this url
+export async function fetchRandomMeal<T>(): Promise<T> {
     try {
         console.log('Attempting to retrieve random meal data from API');
         // endpoint for generating a random meal
@@ -18,6 +18,9 @@ export async function fetchRandomMeal(): Promise<any> {
         return randomMealData;
     } catch (error) {
         // specific console error
-        console.error('Error found while fetching random meal data:', error)
+        console.error('Error found while fetching random meal data:', error);
+
+        // throw the error so that there is a return in the catch block
+        throw error;
     }
 } 
