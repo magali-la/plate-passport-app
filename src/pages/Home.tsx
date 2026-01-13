@@ -3,7 +3,7 @@ import useFetchRandom from "../hooks/useFetch"
 
 export default function Home() {
     // import with custom fetch random custom hook
-    const { meal, loading, error, displayRandomMeal } = useFetchRandom();
+    const { meal, loading, displayRandomMeal } = useFetchRandom();
 
     // use effect to load the data on mount - if the function is called again, restart the process
     useEffect(() => {
