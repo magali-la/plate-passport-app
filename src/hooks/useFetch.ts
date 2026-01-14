@@ -1,7 +1,7 @@
 // retrieve data from the API fetch in apiService and package it in state for components
 import { useState } from "react";
-import { fetchAllCategories, fetchAllCuisines, fetchRandomMeal } from "../services/apiService";
-import type { RawCuisinesData, Meal, RawMealData, RawCategoryListData } from "../types";
+import { fetchAllCategories, fetchAllCategoryDesc, fetchAllCuisines, fetchRandomMeal } from "../services/apiService";
+import type { RawCuisinesData, Meal, RawMealData, RawCategoryListData, CategoryDesc, RawCategoryDescData } from "../types";
 
 // CUSTOM HOOK - RANDOM MEAL FETCH - fetching and setting just the meal object in state 
 export function useFetchRandom() {
@@ -119,4 +119,33 @@ export function useFetchAllCategories() {
     }
     
     return { categories, loading, error, displayAllCategories }
+}
+
+// CUSTOM HOOK - All category descriptions in a list
+export function useFetchAllCategoryDesc() {
+    const [allCategoryDesc, setAllCategoryDesc] = useState<CategoryDesc[]>([]);
+    const [loading, setLoading] = useState<boolean>(false);
+    const [error, setError] = useState<Error | null>(null);
+
+    async function displayAllCategoryDesc() {
+        setLoading(true);
+        setError(null);
+
+        try {
+            // get raw data which is object with key of categories and value an array of objects
+            const allCategoryDescData = await fetchAllCategoryDesc<RawCategoryDescData>();
+
+            // convert to just the array to put in state
+            const allCategoriesDescArray = allCategoryDescData.categories;
+
+            // set in state
+            setAllCategoryDesc(allCategoriesDescArray);
+        } catch (error) {
+            setError(error as Error);
+        } finally {
+            setLoading(false)
+        }
+    }
+
+    return { allCategoryDesc, loading, error, displayAllCategoryDesc };
 }

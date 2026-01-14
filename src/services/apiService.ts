@@ -64,3 +64,23 @@ export async function fetchAllCategories<T>(): Promise<T> {
         throw error;
     }
 }
+
+// fetch list of category descriptions
+export async function fetchAllCategoryDesc<T>(): Promise<T> {
+    try{
+        const response = await fetch('https://www.themealdb.com/api/json/v1/1/categories.php');
+
+        if (!response.ok){
+            throw new Error('API failed to retrieve list of category descriptions')
+        }
+
+        // set variable name
+        const categoryDescData = await response.json();
+        console.log('All categories data retrieved successfully from API');
+
+        return categoryDescData;
+    } catch (error){
+        console.error('Error found while fetching categories description data: ', error);
+        throw error;
+    }
+}

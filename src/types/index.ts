@@ -32,7 +32,7 @@ export interface RawCuisinesData {
     meals: Cuisine[]
 }
 
-// interface for Cuisines
+// interface for Category for lists - filters, buttons, labels, etc
 export interface Category {
     strCategory: string;
 }
@@ -40,4 +40,17 @@ export interface Category {
 // interface for the raw array of objects with the cuisine
 export interface RawCategoryListData {
     meals: Category[]
+}
+
+// interfaces for Category for category pages with descriptions and images
+export interface CategoryDesc {
+    idCategory: string;
+    strCategory: string;
+    strCategoryThumb: string;
+    strCategoryDescription: string;
+}
+
+// shape for the raw array with category objects - objct with a categories key holding an array of category objects
+export interface RawCategoryDescData {
+    categories: CategoryDesc[]
 }
