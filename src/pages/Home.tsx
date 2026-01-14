@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import useFetchRandom from "../hooks/useFetch"
+import { useFetchRandom } from "../hooks/useFetch";
 
 export default function Home() {
     // import with custom fetch random custom hook
