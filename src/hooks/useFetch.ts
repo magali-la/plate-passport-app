@@ -1,7 +1,7 @@
 // retrieve data from the API fetch in apiService and package it in state for components
 import { useState } from "react";
-import { fetchAllCuisines, fetchRandomMeal } from "../services/apiService";
-import type { RawCuisinesData, Meal, RawMealData } from "../types";
+import { fetchAllCategories, fetchAllCuisines, fetchRandomMeal } from "../services/apiService";
+import type { RawCuisinesData, Meal, RawMealData, RawCategoryListData } from "../types";
 
 // CUSTOM HOOK - RANDOM MEAL FETCH - fetching and setting just the meal object in state 
 export function useFetchRandom() {
@@ -78,11 +78,45 @@ export function useFetchAllCuisines() {
             setError(error as Error);
         } finally {
             setLoading(false);
-        }
-
-        
+        } 
     }
     
     return { cuisines, loading, error, displayAllCuisines }
 }
 
+
+// CUSTOM HOOK - All categories in a list to look for food from categories filters
+export function useFetchAllCategories() {
+    const [categories, setCategories] = useState<string[]>([]);
+    const [loading, setLoading] = useState<boolean>(false);
+    const [error, setError] = useState<Error | null>(null);
+
+    // get the data and convert it to just the array called meals
+    async function displayAllCategories() {
+        setLoading(true);
+        setError(null);
+
+        // try catch for getting raw data from the API service
+        try {
+            // get the raw data
+            const allCategoriesData = await fetchAllCategories<RawCategoryListData>();
+            
+            if (!allCategoriesData) {
+                throw new Error("Data not unwrapped");
+            }
+            console.log('All categories data unwrapped');
+
+            // convert each into an array with just the strings of categories to store in state - map through to transform each index into just its
+            const categoriesArray = allCategoriesData.meals.map(categoryObj => categoryObj.strCategory);
+
+            // set state with the array
+            setCategories(categoriesArray);
+        } catch (error) {
+            setError(error as Error);
+        } finally {
+            setLoading(false);
+        } 
+    }
+    
+    return { categories, loading, error, displayAllCategories }
+}

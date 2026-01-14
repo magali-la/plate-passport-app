@@ -31,3 +31,13 @@ export interface Cuisine {
 export interface RawCuisinesData {
     meals: Cuisine[]
 }
+
+// interface for Cuisines
+export interface Category {
+    strCategory: string;
+}
+
+// interface for the raw array of objects with the cuisine
+export interface RawCategoryListData {
+    meals: Category[]
+}

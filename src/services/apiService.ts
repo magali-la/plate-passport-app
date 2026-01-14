@@ -25,7 +25,7 @@ export async function fetchRandomMeal<T>(): Promise<T> {
     }
 } 
 
-// fetch all meals for recipe page
+// fetch  list of all cuisines
 export async function fetchAllCuisines<T>(): Promise<T> {
     try{
         const response = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?a=list');
@@ -41,6 +41,26 @@ export async function fetchAllCuisines<T>(): Promise<T> {
         return allCuisinesData;
     } catch (error){
         console.error('Error found while fetching all cuisines data: ', error);
+        throw error;
+    }
+}
+
+// fetch list of all categories
+export async function fetchAllCategories<T>(): Promise<T> {
+    try{
+        const response = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?c=list');
+
+        if (!response.ok){
+            throw new Error('API failed to retrieve list of all categories')
+        }
+
+        // set variable name
+        const allCategoriesData = await response.json();
+        console.log('All categories data retrieved successfully from API');
+
+        return allCategoriesData;
+    } catch (error){
+        console.error('Error found while fetching categories list data: ', error);
         throw error;
     }
 }
