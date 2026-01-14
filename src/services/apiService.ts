@@ -25,6 +25,28 @@ export async function fetchRandomMeal<T>(): Promise<T> {
     }
 } 
 
+// fetch individual meal by idMeal - takes an argument to know what to retrieve from the api
+export async function fetchMealById<T>(id: string): Promise<T> {
+    try{
+        const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
+
+        // throw error if not fetched
+        if (!response.ok) {
+            throw new Error(`API failed to retrieve meal data by id: ${id}`);
+        }
+
+        // set variable name 
+        const singleMealData = await response.json();
+        // console success message
+        console.log(`Meal data retrieved successfully for meal: ${id}`, singleMealData.meals[0].strMeal);
+
+        return singleMealData;
+    } catch (error) {
+        console.log(`Error found while fetching meal by id: ${id}`, error)
+        throw error;
+    }
+}
+
 // fetch  list of all cuisines
 export async function fetchAllCuisines<T>(): Promise<T> {
     try{
