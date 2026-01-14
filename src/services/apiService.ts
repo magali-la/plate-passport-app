@@ -24,3 +24,23 @@ export async function fetchRandomMeal<T>(): Promise<T> {
         throw error;
     }
 } 
+
+// fetch all meals for recipe page
+export async function fetchAllCuisines<T>(): Promise<T> {
+    try{
+        const response = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?a=list');
+
+        if (!response.ok){
+            throw new Error('API failed to retrieve list of all cuisines')
+        }
+
+        // set variable name
+        const allCuisinesData = await response.json();
+        console.log('All cuisines data retrieved successfully from API');
+
+        return allCuisinesData;
+    } catch (error){
+        console.error('Error found while fetching all cuisines data: ', error);
+        throw error;
+    }
+}

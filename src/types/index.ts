@@ -20,3 +20,14 @@ export interface Meal {
 export interface RawMealData {
     meals: Meal[];
 }
+
+
+// interface for Cuisines
+export interface Cuisine {
+    strArea: string;
+}
+
+// interface for the raw array of objects with the cuisine
+export interface RawCuisinesData {
+    meals: Cuisine[]
+}
