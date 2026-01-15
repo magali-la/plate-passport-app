@@ -1,6 +1,7 @@
 import { Link, useParams } from "react-router";
 import { useFetchAllCategoryDesc } from "../hooks/useFetch"
 import { useEffect } from "react";
+import RecipeList from "../components/RecipeList/RecipeList";
 
 export default function CategoryDetail() {
     // grab the url :slug as the category title to avoid delays from data retrieval
@@ -25,17 +26,20 @@ export default function CategoryDetail() {
                 <h3 className="font-semibold">Loading category details</h3>
                 // to-do, add spinner
             ) : (
-                // actually put the data
-                <div className="md:grid md:grid-cols-2">
-                    <p>{categoryDesc?.strCategoryDescription}</p> 
+                <div>
+                    {/* actually put the data */}
+                    <div className="md:grid md:grid-cols-2">
+                        <p>{categoryDesc?.strCategoryDescription}</p>
                     
-                    {/* image box */}
-                    <div>
-                        <img src={categoryDesc?.strCategoryThumb} alt={`image of ${categoryDesc?.strCategory}`}/>
+                        {/* image box */}
+                        <div>
+                            <img src={categoryDesc?.strCategoryThumb} alt={`image of ${categoryDesc?.strCategory}`}/>
+                        </div>
                     </div>
-                </div> 
+                    {/* send the slug as a prop to know what to actually render in the list */}
+                    <RecipeList nameOfCatOrCuisine={slug!} type="category"/>
+                </div>
             )}
-            
         </div>
     )
 }
