@@ -22,7 +22,7 @@ function App() {
         {/* categories nested route w category page */}
         <Route path='categories'>
           <Route index element={<Categories/>} />
-          <Route path=':strCategory' element={<CategoryDetail/>} />
+          <Route path=':slug' element={<CategoryDetail/>} />
         </Route>
 
         {/* recipes nested route w recipe pge */}
