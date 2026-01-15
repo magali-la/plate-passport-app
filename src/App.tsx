@@ -28,7 +28,7 @@ function App() {
         {/* recipes nested route w recipe pge */}
         <Route path='recipes'>
           <Route index element={<Recipes/>} />
-          <Route path=':idMeal' element={<RecipeDetail />} />
+          <Route path=':slug' element={<RecipeDetail />} />
         </Route>
         
         <Route path='favorites' element={<Favorites/>} />
