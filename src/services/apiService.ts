@@ -106,3 +106,22 @@ export async function fetchAllCategoryDesc<T>(): Promise<T> {
         throw error;
     }
 }
+
+// this is going to adapt based off the slug of the page visited so that it automatically knows what endpoint to fetch 
+export async function fetchMealsByCategory<T>(categoryName: string): Promise<T> {
+    try {
+        const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${categoryName}`)
+
+        if (!response.ok) {
+            throw new Error('API failed to retrieve list of meals in category')
+        }
+
+        const mealsInCategory = await response.json()
+        console.log(`All meals from ${categoryName} category retrieved successfully from API`);
+
+        return mealsInCategory
+    } catch (error) {
+        console.error(`Error found while fetching meals from ${categoryName} data: `, error);
+        throw error;
+    }
+}

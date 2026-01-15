@@ -54,3 +54,14 @@ export interface CategoryDesc {
 export interface RawCategoryDescData {
     categories: CategoryDesc[]
 }
+
+// interfaces for the meals that show up from a filtered fetch by category or cuisine, which have less key-value pairs than the normal meals one
+export interface FilteredMeal {
+    strMeal: string;
+    strMealThumb: string;
+    idMeal: string;
+}
+
+export interface RawFilteredMealsData {
+    meals: FilteredMeal[];
+}

@@ -1,7 +1,7 @@
 // retrieve data from the API fetch in apiService and package it in state for components
 import { useState } from "react";
-import { fetchAllCategories, fetchAllCategoryDesc, fetchAllCuisines, fetchMealById, fetchRandomMeal } from "../services/apiService";
-import type { RawCuisinesData, Meal, RawMealData, RawCategoryListData, CategoryDesc, RawCategoryDescData } from "../types";
+import { fetchAllCategories, fetchAllCategoryDesc, fetchAllCuisines, fetchMealById, fetchMealsByCategory, fetchRandomMeal } from "../services/apiService";
+import type { RawCuisinesData, Meal, RawMealData, RawCategoryListData, CategoryDesc, RawCategoryDescData, RawFilteredMealsData, FilteredMeal } from "../types";
 
 // CUSTOM HOOK - RANDOM MEAL FETCH - fetching and setting just the meal object in state 
 export function useFetchRandom() {
@@ -189,4 +189,32 @@ export function useFetchAllCategoryDesc() {
     }
 
     return { allCategoryDesc, loading, error, displayAllCategoryDesc };
+}
+
+// CUSTOM HOOK - fetch meals of a certain category, pass argument from slug
+export function useFetchMealsByCategory() {
+    const [mealsByCategory, setMealsByCategory] = useState<FilteredMeal[]>([]);
+    const [loading, setLoading] = useState<boolean>(false);
+    const [error, setError] = useState<Error | null>(null);
+
+    async function displayMealsByCategory(categorySlug: string) {
+        setLoading(true);
+        setError(null);
+
+        try {
+            const filteredMeals = await fetchMealsByCategory<RawFilteredMealsData>(categorySlug);
+
+            // this is extracting the meals array from the overarching object retrieved from the API
+            const mealsByCategoryArray = filteredMeals.meals;
+
+            setMealsByCategory(mealsByCategoryArray);
+
+        } catch (error) {
+            setError(error as Error)
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    return { mealsByCategory, loading, error, displayMealsByCategory }
 }
