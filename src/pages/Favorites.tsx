@@ -6,7 +6,7 @@ import RecipeCard from "../components/RecipeCard/RecipeCard";
 
 export default function Favorites() {
     // set state for favorites - initilize with function to retrieve the saved ids from local storage
-    const [favoriteMealIds, setFavoriteMealIds] = useState<string[]>(() => getFavorites());
+    const [favoriteMealIds] = useState<string[]>(() => getFavorites());
     // set state for array full of full meal objects
     const [favoriteMeals, setFavoriteMeals] = useState<Meal[]>([]);
     // use display meal only to get the full meal data for the card to work
