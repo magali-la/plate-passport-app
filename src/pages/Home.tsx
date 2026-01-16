@@ -38,7 +38,7 @@ export default function Home() {
                             <p>Category: {meal?.strCategory}</p>
                             <Link to={`/recipes/${meal?.idMeal}`}>View Recipe</Link>
                             <p className="">Want to load a new recipe?</p>
-                            <button onClick={displayRandomMeal}>Recipe Remix</button>
+                            <button className="py-2 px-6 bg-blue-400 rounded-3xl" onClick={displayRandomMeal}>Recipe Remix</button>
                         </div>
                     </div>
                 )}

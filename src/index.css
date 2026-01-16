@@ -26,7 +26,7 @@
 }
 
 body {
-    @apply font-prompt;
+    @apply font-prompt px-16;
 }
 
 a {
