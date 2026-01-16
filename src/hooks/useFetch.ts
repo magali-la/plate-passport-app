@@ -75,6 +75,9 @@ export function useFetchMealById() {
             // set in state for use elsewhere
             setMeal(singleMealObj);
 
+            // return it for use in favorites
+            return singleMealObj;
+
         } catch (error) {
             // explicitly state type to avoid ts errors
             setError(error as Error);

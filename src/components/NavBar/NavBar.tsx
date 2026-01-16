@@ -9,7 +9,7 @@ export default function NavBar() {
             <div className="flex flex-row items-center gap-4">
                 <Link to="/">Home</Link>
                 <Link to="/discover">Discover</Link>
-                <Link to="/recipes">Recipes</Link>
+                {/* <Link to="/recipes">Recipes</Link> */}
                 <Link to="/favorites">Favorites</Link>
             </div>
         </nav>

@@ -32,3 +32,7 @@ body {
 a {
     @apply text-blue-400 hover:text-blue-700 hover:underline active:font-bold;
 }
+
+button {
+    @apply cursor-pointer;
+}

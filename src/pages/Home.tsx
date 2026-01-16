@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useFetchRandom } from "../hooks/useFetch";
+import { Link } from "react-router";
 
 export default function Home() {
     // import with custom fetch random custom hook
@@ -35,7 +36,7 @@ export default function Home() {
                             {meal?.strArea && <p className="italic">{meal?.strArea}</p>}
                             {meal?.strTags && <p>Tags: {meal.strTags}</p>}
                             <p>Category: {meal?.strCategory}</p>
-                            <button>View Recipe</button>
+                            <Link to={`/recipes/${meal?.idMeal}`}>View Recipe</Link>
                             <p className="">Want to load a new recipe?</p>
                             <button onClick={displayRandomMeal}>Recipe Remix</button>
                         </div>

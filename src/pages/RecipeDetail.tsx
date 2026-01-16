@@ -1,6 +1,7 @@
 import { useParams } from "react-router"
 import { useFetchMealById } from "../hooks/useFetch";
 import { useEffect } from "react";
+import { addFavorite } from "../utils/favorites";
 
 export default function RecipeDetail() {
     // take the slug which is the route chosen from the link that has the meal's id of the card or link clicked
@@ -12,8 +13,20 @@ export default function RecipeDetail() {
     // use effect load on mount with the slug as the fetch
     useEffect(() => {
         // use the slug as the argument to find the exact match - use nonnull assertion to avoid ts error 
-        displayMeal(slug!);
-    })
+        displayMeal(slug);
+    }, [])
+
+    // handle the favorites click
+    function handleFavorites(){
+        // first check if meal exists
+        if (meal) {
+            // use slug since it's already in the url anyways
+            addFavorite(slug!)
+            alert('Meal added successfully!')
+        } else {
+            alert('There was a problem adding your meal to favorites. Please try again');
+        }
+    }
 
     return (
         <div>
@@ -24,6 +37,9 @@ export default function RecipeDetail() {
             <div>
                 <img src={`${meal?.strMealThumb}/medium`} alt={`image of ${meal?.strCategory}`}/>
             </div>
+            {/* add to favorites */}
+            <p>Love this recipe? Stamp it to your favorites!</p>
+            <button className="p-3 bg-green-300 rounded-4xl font-semibold" onClick={handleFavorites}>Add to Plate Passport</button>
 
             {/* info about cuisine and category */}
             <h2>About this Recipe</h2>
