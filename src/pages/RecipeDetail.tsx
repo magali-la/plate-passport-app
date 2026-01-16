@@ -13,7 +13,7 @@ export default function RecipeDetail() {
     // use effect load on mount with the slug as the fetch
     useEffect(() => {
         // use the slug as the argument to find the exact match - use nonnull assertion to avoid ts error 
-        displayMeal(slug);
+        displayMeal(slug!);
     }, [])
 
     // handle the favorites click
